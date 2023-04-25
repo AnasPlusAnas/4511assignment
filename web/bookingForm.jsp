@@ -34,7 +34,7 @@
                                 } else {
                             %>
                             <!-- Modal -->
-                            <div
+                                <div
                                 class="modal fade"
                                 id="exampleModalCenter"
                                 tabindex="-1"

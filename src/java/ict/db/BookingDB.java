@@ -59,7 +59,9 @@ public class BookingDB extends DB {
         }
     }
 
-    public boolean addBooking(String venue, String username, String booking_date, String time1, String time2, String time3, String time4, int fee, String guest1, String guest2, String guest3, String guest4, String guest5, String guest6, String guest7, String guest8, String guest9, String guest10) {
+    public boolean addBooking(String venue, String username, String booking_date, String time1, String time2,
+            String time3, String time4, int fee, String guest1, String guest2, String guest3, String guest4,
+            String guest5, String guest6, String guest7, String guest8, String guest9, String guest10) {
         Connection con = null;
         PreparedStatement preparedStatement = null;
         boolean isSuccess = false;
@@ -287,4 +289,51 @@ public class BookingDB extends DB {
         }
         return bookingList;
     }
+
+    public ArrayList<String> getGuests(int id) {
+        ArrayList<String> guestList = new ArrayList<>();
+        Connection con = null;
+        PreparedStatement stmnt = null;
+        ResultSet rs = null;
+
+        try {
+            con = getConnection();
+            stmnt = con.prepareStatement("SELECT * FROM Booking WHERE id = ?");
+
+            stmnt.setInt(1, id);
+
+            rs = stmnt.executeQuery();
+
+            while (rs.next()) {
+                guestList.add(rs.getString("guest1"));
+                guestList.add(rs.getString("guest2"));
+                guestList.add(rs.getString("guest3"));
+                guestList.add(rs.getString("guest4"));
+                guestList.add(rs.getString("guest5"));
+                guestList.add(rs.getString("guest6"));
+                guestList.add(rs.getString("guest7"));
+                guestList.add(rs.getString("guest8"));
+                guestList.add(rs.getString("guest9"));
+                guestList.add(rs.getString("guest10"));
+            }
+        } catch (SQLException | IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (stmnt != null) {
+                    stmnt.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return guestList;
+    }
+
 }

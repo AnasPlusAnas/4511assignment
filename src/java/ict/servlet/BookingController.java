@@ -36,8 +36,7 @@ public class BookingController extends HttpServlet {
         bkDB = new BookingDB();
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         User bookUser = (User) session.getAttribute("userInfo");
         String bookingUser = bookUser.getUsername();
@@ -50,7 +49,6 @@ public class BookingController extends HttpServlet {
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/memberBookingList.jsp");
                 rd.forward(request, response);
             }
-            return;
         }
 
         String username = request.getParameter("yourname");
@@ -92,5 +90,15 @@ public class BookingController extends HttpServlet {
             // 转发给JSP页面
             request.getRequestDispatcher("failureBk.jsp").forward(request, response);
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
+
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        processRequest(request, response);
     }
 }

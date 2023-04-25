@@ -50,7 +50,7 @@
                                                 <td> <%= v.getName()%> </td>
                                                 <td><img src="<%= v.getImg()%>" width="100" height="100" alt="location" /></td>
                                                 <td><%= v.getDes() %> </td>
-                                                <td><label class="badge <%= availableClass%>"> <%= availableText%></label></td> 
+                                                <td><label style='padding:10px;' class="badge <%= availableClass%>"> <%= availableText%></label></td> 
                                                 <td><%= v.getAddress()%></td>
                                                 <td><%= v.getCapacity() %> </td>
                                                 <td>$<%= v.getBkFee()%></td>
