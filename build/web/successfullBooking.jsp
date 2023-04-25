@@ -13,6 +13,6 @@
     </head>
     <body>
         <h1>Sucessful</h1>
-        <input type="button" value="Back"/>
+        <a href="VenueController?action=list">Back</a>
     </body>
 </html>

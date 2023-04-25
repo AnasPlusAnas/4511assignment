@@ -57,8 +57,10 @@
                                                 <td>$<%= v.getPersonCharge()%></td>
                                                 
                                                 <td>
-                                                    <form action="bookingForm.jsp?vname=<%= v.getName()%>&fee=<%= v.getBkFee()%>">
-                                                        <input type="submit" <%= bookableClass%>  value="Book" />
+                                                    <form action="bookingForm.jsp" method="post">
+                                                        <input type="hidden" name="vname" value="<%= v.getName() %>" />
+                                                        <input type="hidden" name="fee" value="<%= v.getBkFee() %>" />
+                                                        <input type="submit" <%= bookableClass %> value="Book" />
                                                     </form>
                                                 </td>
                                             </tr>

@@ -1,21 +1,24 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%> 
-<%@page import="ict.bean.Venue" %> 
-<%@page import="java.util.ArrayList" %>
+<%-- 
+    Document   : memberBookingList
+    Created on : Apr 25, 2023, 9:57:33 PM
+    Author     : dadwd
+--%>
 
-    <html>
-        <head>
-            <meta charset="UTF-8" />
-            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Venue List</title>
-            <link rel="stylesheet" href="./styles/bookingList.css" />
-            <link
-                rel="stylesheet"
-                href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-                />
-        </head>
-        <body>
-            <jsp:useBean id="venueList" class="java.util.ArrayList<Venue>" scope="request" />
+<%@page import="ict.bean.Booking"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="ict.bean.Venue" %>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Your Bookings</title>
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            />
+    </head>
+    <body>
+        <jsp:useBean id="bookingList" class="java.util.ArrayList<Booking>" scope="request" />
 
             <div class="page-content page-container" id="page-content">
                 <div class="padding">
@@ -39,15 +42,11 @@
                                         </thead>
                                         <tbody>
                                             <%
-                                                for (int i = 0; i < venueList.size(); i++) {
-                                                    Venue v = venueList.get(i);
-                                                    String availableClass = v.getAvailability().equals("yes") ? "badge-success" : "badge-danger";
-                                                    String availableText = v.getAvailability().equals("yes") ? "Available" : "Not Available";
-                                                    String bookableClass = v.getAvailability().equals("yes") ? "" : "disabled style=\"color:red;\"";
-
+                                                for (int i = 0; i < bookingList.size(); i++) {
+                                                    Booking b = bookingList.get(i);
                                             %>
                                             <tr class="text-center">
-                                                <td> <%= v.getName()%> </td>
+                                                <td> <%= b.getName()%> </td>
                                                 <td><img src="<%= v.getImg()%>" width="100" height="100" alt="location" /></td>
                                                 <td><%= v.getDes() %> </td>
                                                 <td><label class="badge <%= availableClass%>"> <%= availableText%></label></td> 
@@ -75,5 +74,5 @@
                     </div>
                 </div>
             </div>
-        </body>
-    </html>
+    </body>
+</html>

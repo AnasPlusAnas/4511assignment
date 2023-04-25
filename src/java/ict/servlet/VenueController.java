@@ -18,7 +18,6 @@ public class VenueController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-
         vDB = new VenueDB();
     }
 
@@ -27,6 +26,7 @@ public class VenueController extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         // get all record about venue for showing
+
         if (action != null && action.equals("list")) {
             ArrayList<Venue> venueList = vDB.getAllRecords();
             request.setAttribute("venueList", venueList);

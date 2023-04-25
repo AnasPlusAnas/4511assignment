@@ -19,7 +19,7 @@
         User user = (User) session.getAttribute("userInfo");
         String buttonContent = user == null ? "Log In" : "Log Out";
         String hrefLocation = buttonContent.equals("Log In") ? "login.jsp" : "logout.jsp";
-        String profileVisible = buttonContent.equals("Log In") ? "" : "Profile";
+        String profileVisible = buttonContent.equals("Log In") ? "" : "My Bookings";
     %>
    <header>
       <nav class="navbar">
@@ -31,7 +31,7 @@
           <li class="navbar-item">
             <a class="navbar-link" href="#">Contact</a>
           </li>
-          <li class="navbar-item"><a class="navbar-link" href="#"><%= profileVisible %></a></li>
+          <li class="navbar-item"><a class="navbar-link" href="BookingController?action=list"><%= profileVisible %></a></li>
         </ul>
         <a class="navbar-profile" href="<%= hrefLocation %>"><%= buttonContent %></a>
       </nav>

@@ -6,6 +6,7 @@
 package ict.servlet;
 
 import ict.bean.Booking;
+import ict.bean.User;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -18,6 +19,9 @@ import javax.servlet.http.HttpServletResponse;
  * @author a1397
  */
 import ict.db.BookingDB;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "BookingController", urlPatterns = {"/BookingController"})
 
@@ -32,7 +36,22 @@ public class BookingController extends HttpServlet {
         bkDB = new BookingDB();
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User bookUser = (User) session.getAttribute("userInfo");
+        String bookingUser = bookUser.getUsername();
+
+        String action = request.getParameter("action");
+        if (action.equals("list")) {
+            ArrayList<Booking> bookings = bkDB.getAllBookings(bookingUser);
+            if (bookings != null) {
+                request.setAttribute("bookingList", bookings);
+                RequestDispatcher rd = getServletContext().getRequestDispatcher("/memberBookingList.jsp");
+                rd.forward(request, response);
+            }
+            return;
+        }
 
         String username = request.getParameter("yourname");
         String venue = request.getParameter("vname");
@@ -68,11 +87,10 @@ public class BookingController extends HttpServlet {
         // 檢查預訂是否成功
         if (success) {
             // 重定向到 successful.jsp
-            response.sendRedirect("successfulBk.jsp");
+            response.sendRedirect("successfullBooking.jsp");
         } else {
             // 转发给JSP页面
             request.getRequestDispatcher("failureBk.jsp").forward(request, response);
         }
-
     }
 }
