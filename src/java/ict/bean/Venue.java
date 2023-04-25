@@ -26,9 +26,10 @@ public class Venue implements Serializable {
     private int booking_fee;
     private int personCharge;
     private int id;
+    private String availability;
 
     public Venue(int id, String name, String img, String address, String capacity, String description, int booking_fee,
-            int personCharge) {
+            int personCharge, String availability) {
         this.name = name;
         this.img = img;
         this.address = address;
@@ -37,6 +38,7 @@ public class Venue implements Serializable {
         this.booking_fee = booking_fee;
         this.personCharge = personCharge;
         this.id = id;
+        this.availability = availability;
 
     }
 
@@ -116,6 +118,14 @@ public class Venue implements Serializable {
 
     public void setStatus(int id) {
         this.id = id;
+    }
+
+    public void setAvailability(String availability) {
+        this.availability = availability;
+    }
+
+    public String getAvailability() {
+        return this.availability;
     }
 
 }

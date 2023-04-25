@@ -195,6 +195,8 @@ public class VenueDB extends DB {
 
                 v.setPersonCharge(rs.getInt("personCharge"));
 
+                v.setAvailability(rs.getString("available"));
+
                 venueList.add(v);
             }
         } catch (SQLException | IOException e) {
